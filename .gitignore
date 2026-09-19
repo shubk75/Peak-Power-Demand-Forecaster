@@ -1,0 +1,18 @@
+# Reference-only materials (context documents, not used by the pipeline)
+files/
+
+# Virtual environment
+.venv/
+
+# Generated artifacts — reproduce with:  python run_pipeline.py
+data/processed/
+db/
+models/
+reports/evaluation_report.md
+
+# Python artifacts
+__pycache__/
+*.pyc
+
+# OS artifacts
+.DS_Store
