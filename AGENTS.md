@@ -27,7 +27,7 @@ Read these files in this order before writing code, and keep them in sync as you
 - **Persist to SQLite**, staging through CSV/pandas as the intermediate format, per
   `architecture.md`.
 - **Dashboard must include**: actual-vs-predicted demand chart, RMSE/R² comparison table across
-  all evaluated models, model-selection control, and a "what-if" temperature slider (+1°C to
+  all evaluated models, model-selection control, and a "what-if" temperature slider (+0°C to
   +5°C) that recomputes the predicted peak demand live.
 
 ## Conventions

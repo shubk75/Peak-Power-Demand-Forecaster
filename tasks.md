@@ -91,7 +91,7 @@ contents.
   - Model selector limited to `qualifies_for_dashboard = True` models.
   - Actual-vs-predicted line chart for the selected model over the test period.
   - Metrics panel (MAE/RMSE/R² for selected model vs. naive baseline).
-  - "What-if" temperature slider (+1°C to +5°C) applied to a user-selected date's temperature
+  - "What-if" temperature slider (+0°C to +5°C) applied to a user-selected date's temperature
     input, recomputing the predicted `peak_mw` live using the selected model.
 - [x] Confirm `streamlit run src/dashboard/app.py` launches without retraining any model (reads
   only from `db/forecaster.db` and `models/`).

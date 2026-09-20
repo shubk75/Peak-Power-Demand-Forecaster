@@ -45,7 +45,7 @@ planner.
 - Model selector: dropdown limited to qualifying models (R² > 0.5).
 - Metrics panel: MAE/RMSE/R² for the selected model, shown alongside the naive baseline for
   comparison.
-- "What-if" temperature slider: lets the user add +1°C to +5°C to a chosen day's temperature
+- "What-if" temperature slider: lets the user add +0°C to +5°C to a chosen day's temperature
   input and see the recomputed predicted peak demand.
 - Should run locally via `streamlit run app.py` (exact path per `architecture.md`).
 

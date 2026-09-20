@@ -143,7 +143,7 @@ def main():
             "Day", dates, index=len(dates) - 1, format_func=lambda d: str(d.date()),
         )
         delta = st.slider(
-            "Temperature increase (°C)", min_value=1.0, max_value=5.0,
+            "Temperature increase (°C)", min_value=0.0, max_value=5.0,
             step=0.5, value=1.0,
         )
 
