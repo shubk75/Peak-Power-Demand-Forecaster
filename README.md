@@ -29,6 +29,8 @@ Python 3.x, no GPU required. Everything runs locally — no cloud dependencies.
 .venv/bin/streamlit run src/dashboard/app.py
 ```
 
+Or run the pipeline + dashboard in one go: `./start.sh`
+
 A fresh clone + `pip install -r requirements.txt` + `python run_pipeline.py` reproduces the
 feature table, SQLite database, saved models, and evaluation report from scratch.
 
