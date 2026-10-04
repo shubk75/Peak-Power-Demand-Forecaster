@@ -14,11 +14,19 @@
 ```
 peak-power-demand-forecaster/
 ├── AGENTS.md
-├── requirements.md
-├── architecture.md
-├── data-schema.md
-├── tasks.md
+├── README.md
 ├── requirements.txt
+├── docs/                          # all documentation
+│   ├── requirements.md
+│   ├── data-schema.md
+│   ├── architecture.md
+│   ├── tasks.md
+│   └── reports/
+│       └── evaluation_report.md   # generated output, not hand-written
+├── scripts/
+│   ├── run_pipeline.py            # one-command pipeline entrypoint
+│   ├── setup.sh / setup.bat       # one-time setup for a fresh clone
+│   └── start.sh / start.bat       # start the Streamlit dashboard server
 ├── data/
 │   ├── raw/
 │   │   └── dataset.csv            # source, unmodified
@@ -42,11 +50,10 @@ peak-power-demand-forecaster/
 │   └── dashboard/
 │       └── app.py                  # Streamlit entrypoint
 ├── models/                         # saved model artifacts (joblib files)
-├── reports/
-│   └── evaluation_report.md        # generated output, not hand-written
 └── tests/
     ├── test_features.py
-    └── test_models.py
+    ├── test_models.py
+    └── test_db.py
 ```
 
 ## Data flow
@@ -62,7 +69,7 @@ peak-power-demand-forecaster/
    - per-model metrics (MAE, RMSE, R², CV R²) → `metrics` table in `db/forecaster.db`, including
      a `naive_baseline` row.
 4. `src/reports/evaluation_report.py` reads the `metrics` table and writes
-   `reports/evaluation_report.md`.
+   `docs/reports/evaluation_report.md`.
 5. `src/dashboard/app.py` reads `metrics`, `predictions`, and loads model artifacts from
    `models/` for the live what-if slider. It does not retrain models.
 

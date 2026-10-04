@@ -1,6 +1,6 @@
 """One-command pipeline: raw CSV -> clean -> features -> SQLite -> models -> report.
 
-Run from the repo root:  python run_pipeline.py
+Run from the repo root:  python scripts/run_pipeline.py
 """
 
 from pathlib import Path
@@ -14,7 +14,7 @@ from src.models.registry import flag_metrics_rows, save_model
 from src.models.train import train_all
 from src.reports.evaluation_report import generate_report
 
-PROCESSED_CSV = Path(__file__).resolve().parent / "data" / "processed" / "features.csv"
+PROCESSED_CSV = Path(__file__).resolve().parents[1] / "data" / "processed" / "features.csv"
 
 
 def main():

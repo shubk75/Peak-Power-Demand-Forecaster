@@ -145,7 +145,7 @@ def main():
     metrics, predictions, features = load_data()
 
     if metrics.empty or not len(features):
-        st.error("No trained models found. Run the pipeline first: `python run_pipeline.py`")
+        st.error("No trained models found. Run the pipeline first: `python scripts/run_pipeline.py`")
         st.stop()
 
     qualifying = metrics[metrics["qualifies_for_dashboard"] == 1]

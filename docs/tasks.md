@@ -78,12 +78,12 @@ training range and non-extrapolating/strongly-regularized models underpredict it
 evaluation report). Flags reflect the real computed R².
 
 ## Phase 5 — Evaluation report
-- [x] `src/reports/evaluation_report.py`: read `metrics` table, generate `reports/
+- [x] `src/reports/evaluation_report.py`: read `metrics` table, generate `docs/reports/
   evaluation_report.md` with a ranked table (by test R²) and a short written interpretation
   (best model, weakest qualifying model, why SVR/Decision Tree — if trained — are excluded,
   comparison against naive baseline).
 
-**DoD:** `reports/evaluation_report.md` is generated (not hand-written) and matches the DB
+**DoD:** `docs/reports/evaluation_report.md` is generated (not hand-written) and matches the DB
 contents.
 
 ## Phase 6 — Dashboard

@@ -14,7 +14,7 @@ import unittest
 
 import numpy as np
 
-import run_pipeline
+from scripts import run_pipeline
 from src.data.db import DB_PATH, connect, read_metrics
 from src.models.registry import (
     EXCLUDED_FROM_PICKER,

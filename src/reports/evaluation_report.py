@@ -1,4 +1,4 @@
-"""Generate reports/evaluation_report.md from the metrics table (FR4).
+"""Generate docs/reports/evaluation_report.md from the metrics table (FR4).
 
 Generated, not hand-written: every number comes from db/forecaster.db, and the
 feature definitions mirror src/features/engineer.py and src/data/clean.py.
@@ -14,7 +14,7 @@ from src.features.engineer import FEATURE_COLUMNS, REFERENCE_SERIES, compute_hot
 from src.models.registry import EXCLUDED_FROM_PICKER
 from src.models.train import NAIVE_BASELINE, SPLIT_DATE
 
-REPORT_PATH = Path(__file__).resolve().parents[2] / "reports" / "evaluation_report.md"
+REPORT_PATH = Path(__file__).resolve().parents[2] / "docs" / "reports" / "evaluation_report.md"
 
 
 def generate_report():

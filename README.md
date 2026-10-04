@@ -9,9 +9,20 @@ baseline), and lets a non-technical grid planner explore "what-if" heatwave scen
 
 ## Setup
 
+One-time setup for a fresh clone (creates the venv, installs packages, runs the pipeline and
+tests):
+
+```bash
+scripts/setup.sh          # Linux / macOS
+scripts\setup.bat         # Windows
+```
+
+Or manually:
+
 ```bash
 python3 -m venv .venv
 .venv/bin/pip install -r requirements.txt
+.venv/bin/python scripts/run_pipeline.py
 ```
 
 Python 3.x, no GPU required. Everything runs locally — no cloud dependencies.
@@ -20,19 +31,21 @@ Python 3.x, no GPU required. Everything runs locally — no cloud dependencies.
 
 ```bash
 # 1. Full pipeline: raw CSV -> clean -> features -> SQLite -> train all models -> report
-.venv/bin/python run_pipeline.py
+.venv/bin/python scripts/run_pipeline.py
 
 # 2. Tests
 .venv/bin/python -m unittest discover -s tests
 
 # 3. Dashboard (reads only from db/ and models/ — never retrains)
-.venv/bin/streamlit run src/dashboard/app.py
+scripts/start.sh
 ```
 
-Or run the pipeline + dashboard in one go: `./start.sh`
+`scripts/start.sh` (or `scripts\start.bat` on Windows) starts the Streamlit server — it checks
+the venv and generated artifacts first and points you to `scripts/setup.sh` if anything is
+missing.
 
-A fresh clone + `pip install -r requirements.txt` + `python run_pipeline.py` reproduces the
-feature table, SQLite database, saved models, and evaluation report from scratch.
+A fresh clone + `scripts/setup.sh` reproduces the feature table, SQLite database, saved models,
+and evaluation report from scratch.
 
 ## What the pipeline produces
 
@@ -41,17 +54,28 @@ feature table, SQLite database, saved models, and evaluation report from scratch
 | Feature table | `data/processed/features.csv` | cleaned + engineered, staging before DB load |
 | SQLite DB | `db/forecaster.db` | `features`, `predictions`, `metrics` tables |
 | Model artifacts | `models/*.joblib` | trained models (scaler bundled for linear/KNN) |
-| Evaluation report | `reports/evaluation_report.md` | generated metrics table + written interpretation |
+| Evaluation report | `docs/reports/evaluation_report.md` | generated metrics table + written interpretation |
 
 Generated artifacts are git-ignored (they are reproducible from a fresh clone via the commands
-above, with fixed random seeds giving identical metrics) — run `python run_pipeline.py` once
-after cloning to create them.
+above, with fixed random seeds giving identical metrics) — run `scripts/setup.sh` (or
+`python scripts/run_pipeline.py`) once after cloning to create them.
 
 ## Repository layout
 
 ```
-├── run_pipeline.py              # one-command pipeline entrypoint
+├── AGENTS.md                     # build spec for AI coding agents
 ├── requirements.txt
+├── docs/                         # all documentation
+│   ├── requirements.md           # what must be true when this is done
+│   ├── data-schema.md            # exact data + features to derive
+│   ├── architecture.md           # folder layout, module boundaries, tech stack
+│   ├── tasks.md                  # phased build plan
+│   └── reports/
+│       └── evaluation_report.md  # generated metrics table + interpretation
+├── scripts/
+│   ├── run_pipeline.py           # one-command pipeline entrypoint
+│   ├── setup.sh / setup.bat      # one-time setup for a fresh clone
+│   └── start.sh / start.bat      # start the Streamlit dashboard server
 ├── data/
 │   ├── raw/dataset.csv          # source data (1,037 days, 10 Aug 2021 – 21 Jun 2024)
 │   └── processed/features.csv   # generated
@@ -63,7 +87,6 @@ after cloning to create them.
 │   ├── reports/evaluation_report.py
 │   └── dashboard/app.py         # Streamlit entrypoint
 ├── models/                      # generated artifacts
-├── reports/evaluation_report.md # generated
 └── tests/                       # test_features.py, test_models.py, test_db.py
 ```
 

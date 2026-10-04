@@ -12,7 +12,7 @@ output/
 data/processed/
 /db/
 /models/
-reports/evaluation_report.md
+docs/reports/evaluation_report.md
 
 # Python artifacts
 __pycache__/

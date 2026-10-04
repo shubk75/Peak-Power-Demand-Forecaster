@@ -4,11 +4,12 @@ You are building **Peak Power Demand Forecaster**, a day-ahead Indian national-g
 peak demand forecasting system that predicts heatwave-driven demand spikes, deployed as an
 interactive Streamlit dashboard.
 
-Read these files in this order before writing code, and keep them in sync as you build:
-1. `requirements.md` — what must be true when this is done
-2. `data-schema.md` — the exact data you have and the features you must derive
-3. `architecture.md` — folder layout, module boundaries, tech stack
-4. `tasks.md` — the phased build plan; work through it top to bottom, checking items off
+Read these files in this order before writing code, and keep them in sync as you build (all in
+`docs/`):
+1. `docs/requirements.md` — what must be true when this is done
+2. `docs/data-schema.md` — the exact data you have and the features you must derive
+3. `docs/architecture.md` — folder layout, module boundaries, tech stack
+4. `docs/tasks.md` — the phased build plan; work through it top to bottom, checking items off
 
 ## Non-negotiable constraints
 - **Multi-model, not single-model.** Train and expose OLS, Ridge, Lasso, Elastic Net, KNN,
