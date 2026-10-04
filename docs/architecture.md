@@ -25,6 +25,7 @@ peak-power-demand-forecaster/
 │       └── evaluation_report.md   # generated output, not hand-written
 ├── scripts/
 │   ├── run_pipeline.py            # one-command pipeline entrypoint
+│   ├── build.sh / build.bat       # rebuild artifacts from the current dataset
 │   ├── setup.sh / setup.bat       # one-time setup for a fresh clone
 │   └── start.sh / start.bat       # start the Streamlit dashboard server
 ├── data/

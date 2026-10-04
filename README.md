@@ -40,6 +40,10 @@ Python 3.x, no GPU required. Everything runs locally — no cloud dependencies.
 scripts/start.sh
 ```
 
+Or `scripts/build.sh` (Windows: `scripts\build.bat`) — rebuilds all artifacts from the current
+`data/raw/dataset.csv` (pipeline + tests) in one go; use it after changing the dataset or the
+pipeline code so the dashboard reflects the changes.
+
 `scripts/start.sh` (or `scripts\start.bat` on Windows) starts the Streamlit server — it checks
 the venv and generated artifacts first and points you to `scripts/setup.sh` if anything is
 missing.
@@ -74,6 +78,7 @@ above, with fixed random seeds giving identical metrics) — run `scripts/setup.
 │       └── evaluation_report.md  # generated metrics table + interpretation
 ├── scripts/
 │   ├── run_pipeline.py           # one-command pipeline entrypoint
+│   ├── build.sh / build.bat      # rebuild artifacts from the current dataset
 │   ├── setup.sh / setup.bat      # one-time setup for a fresh clone
 │   └── start.sh / start.bat      # start the Streamlit dashboard server
 ├── data/
