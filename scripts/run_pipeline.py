@@ -3,7 +3,12 @@
 Run from the repo root:  python scripts/run_pipeline.py
 """
 
+import sys
 from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[1]
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))  # allow `from src...` imports when run via scripts/
 
 from src.data.clean import clean
 from src.data.db import connect, write_features, write_metrics, write_predictions
