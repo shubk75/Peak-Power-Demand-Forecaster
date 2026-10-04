@@ -1,6 +1,10 @@
 # Reference-only materials (context documents, not used by the pipeline)
 /files/
 
+# Presentation deliverables and PPT tooling working dirs
+output/
+.chart-data-*/
+
 # Virtual environment
 /.venv/
 
