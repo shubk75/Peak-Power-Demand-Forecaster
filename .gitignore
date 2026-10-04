@@ -6,8 +6,8 @@ files/
 
 # Generated artifacts — reproduce with:  python run_pipeline.py
 data/processed/
-db/
-models/
+/db/
+/models/
 reports/evaluation_report.md
 
 # Python artifacts
