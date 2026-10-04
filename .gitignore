@@ -1,8 +1,8 @@
 # Reference-only materials (context documents, not used by the pipeline)
-files/
+/files/
 
 # Virtual environment
-.venv/
+/.venv/
 
 # Generated artifacts — reproduce with:  python run_pipeline.py
 data/processed/
