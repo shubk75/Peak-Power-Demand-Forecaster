@@ -72,6 +72,40 @@ def plot_actual_vs_predicted(model_pred, naive_pred, model_name):
     return fig
 
 
+COMPARISON_PALETTE = [
+    "#1f77b4", "#2ca02c", "#9467bd", "#ff7f0e", "#8c564b", "#e377c2",
+]
+
+
+def plot_model_comparison(actual, preds_by_model, naive_pred):
+    """Actual demand vs predictions from every visible qualifying model."""
+    fig = go.Figure()
+    fig.add_trace(go.Scatter(
+        x=actual.index, y=actual,
+        name="Actual", line=dict(color="black", width=1.5),
+    ))
+    for i, (name, pred) in enumerate(preds_by_model.items()):
+        fig.add_trace(go.Scatter(
+            x=pred.index, y=pred["predicted_peak_mw"], name=name,
+            line=dict(color=COMPARISON_PALETTE[i % len(COMPARISON_PALETTE)],
+                      width=1.2),
+        ))
+    fig.add_trace(go.Scatter(
+        x=naive_pred.index, y=naive_pred["predicted_peak_mw"],
+        name="Naive baseline", line=dict(color="gray", width=1, dash="dash"),
+    ))
+    fig.add_vrect(
+        x0=pd.Timestamp(SPLIT_DATE), x1=actual.index.max(),
+        fillcolor="rgba(0,0,0,0.06)", line_width=0, annotation_text="test period",
+        annotation_position="top left",
+    )
+    fig.update_layout(
+        height=460, yaxis_title="Peak demand (MW)",
+        margin=dict(l=10, r=10, t=30, b=10), legend=dict(orientation="h", y=1.08),
+    )
+    return fig
+
+
 def plot_explainer(fitted, feature_values, model_name):
     """Feature importances (trees) or standardized coefficients (linear models)."""
     estimator = fitted.named_steps["model"] if hasattr(fitted, "named_steps") else fitted
@@ -137,6 +171,10 @@ def main():
         )
         row = qualifying[qualifying["model_name"] == model_name].iloc[0]
 
+        st.header("Comparison chart")
+        st.caption("Lines in the 'all qualifying models' chart below.")
+        show_models = {name: st.checkbox(name, value=True) for name in model_names}
+
         st.header("What-if heatwave")
         dates = list(features.index)
         chosen_date = st.selectbox(
@@ -175,6 +213,22 @@ def main():
     naive_pred = predictions[predictions["model_name"] == NAIVE_BASELINE]
     st.plotly_chart(plot_actual_vs_predicted(model_pred, naive_pred, model_name),
                     width="stretch")
+
+    # --- All-models comparison chart ------------------------------------------
+    st.subheader("Actual vs predicted — all qualifying models")
+    preds_by_model = {
+        name: predictions[predictions["model_name"] == name]
+        for name in model_names if show_models[name]
+    }
+    st.plotly_chart(
+        plot_model_comparison(model_pred["actual_peak_mw"], preds_by_model, naive_pred),
+        width="stretch",
+    )
+    st.caption(
+        "Every qualifying model (test R² > 0.5) against the same actual demand and the "
+        "naive baseline; toggle individual models on or off in the sidebar. The shaded "
+        "band is the held-out test period."
+    )
 
     # --- What-if heatwave ------------------------------------------------------
     st.subheader("What-if heatwave")
